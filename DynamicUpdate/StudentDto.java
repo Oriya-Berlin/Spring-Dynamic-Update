@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * @author Oriya Madar berlin
  */
-public class StudentDto {
+public class StudentDto implements Serializable {
 
     /**
      * At this class, we can specify which properties (columns)
