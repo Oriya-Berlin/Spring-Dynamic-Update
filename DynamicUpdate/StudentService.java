@@ -9,6 +9,7 @@ import java.util.Objects;
 
 /**
  * @author Oriya Madar berlin
+ * @link  https://github.com/Oriya-Berlin/Spring-Dynamic-Update
  */
 
 @Service
@@ -26,14 +27,16 @@ public class StudentService {
 
         /**
          *  NOTICE: we're iterating the dto class (StudentDto) and NOT the model class (StudentModel),
-         *  we want to control at the user modification abilities, so he will not be able properties
+         *  we want to control at the user modification abilities, so he will not be able to modify properties
          *  like "id", "isEnabled" etc from security or data quality reasons.
          */
         Field[] fields = StudentDto.class.getDeclaredFields();
 
-        // The mechanism here allow me for example to change only the "lastName" property
-        // and the frontend can send me only the "lastName" property, and all the other fields ("firstName","email"...)
-        // will defined as a null automatically.
+        // The mechanism here allow me for example to change only the "lastName" property,
+        // so the frontend can send me only the "lastName" property in the "StudentDto" update request
+        // and all the other fields (like "firstName","email"...) will defined as a null automatically.
+        // Now, we know that all the others fields defined as a null, they will not be iterated at all.
+
         for (Field field : fields)
         {
             if (Objects.equals(field.getName(),"firstName") && studentUpdateRequest.getFirstName() != null){
