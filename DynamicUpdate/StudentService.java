@@ -13,6 +13,7 @@ import java.util.Objects;
  */
 
 @Service
+@Transactional(readOnly = true)
 public class StudentService {
 
     @Autowired
@@ -20,7 +21,7 @@ public class StudentService {
 
 
 
-
+    @Transactional
     public StudentModel studentDynamicUpdate(Long id, StudentDto studentUpdateRequest)
     {
         StudentModel student_DB = studentRepository.findById(id).get();
